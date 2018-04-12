@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>申請東亞信用卡</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <meta property="og:url" content="https://www.hkbea.com/student?52">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/img/index-gift.jpg" /> <!-- facebook -->
+  <meta property="og:title" content="成功申請即送UA戲飛" /> <!-- facebook -->
+  <meta property="og:description" content="東亞銀行信用卡">
+
+  <link rel="icon" type="image/x-icon" href="assets/icon/favicon.png">
+  <meta name="theme-color" content="#4e8ef7">
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/isMobile.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html,body {
+      text-align: center;
+      margin:0;
+      padding:0;
+      width:100%;
+      height:100%;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+      font-family: -apple-system, "Helvetica Neue", "Roboto", sans-serif;
+    }
+    .bea-header {
+      position: relative;
+      width: 100%;
+      height: 66px;
+      background-image: url(assets/img/logo_bg.jpg),url(assets/img/rainbow-bg.jpg);
+      background-size: auto 50%,auto 30%;
+      background-position: right 15% top 30%,0 bottom;
+      background-repeat: no-repeat,repeat-x;
+      background-color: #ed171f;
+    }
+    .back-btn {
+      display: none;
+      position: absolute;
+      top:8%;
+      left:2%;
+      font-size: 28px;
+      color:#fff;
+      outline: none;
+      background:transparent;
+      border:0;
+    }
+    .back-btn.show {
+      display: inline-block;
+    }
+    .main {
+      position: relative;
+      width:200%;
+      height: calc(100% - 66px);
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-transition:-webkit-transform 0.2s ease-in-out;
+      transition: transform 0.2s ease-in-out;
+    }
+    .main.show-pdf {
+      -webkit-transform:translateX(-50%);
+      transform: translateX(-50%);
+    }
+    .main .page1 img{
+      width:100%;
+    }
+    .page1 {
+      position: absolute;
+      top:0;
+      left:0;
+      width:50%;
+    }
+    .page2 {
+      padding:0 10px;
+      position: absolute;
+      top:0;
+      left:50%;
+      width:50%;
+      text-align: left;
+    }
+    .page2 button {
+      border:0;
+      outline: none;
+      background-color:#fff;
+    }
+    .apply-btn {
+      font-size: 18px;
+      border:0;
+      width:70%;
+      height:100%;
+      min-height: 40px;
+      background-color:#ec1b30;
+      color:#fff;
+      font-weight: bold;
+      outline: none;
+    }
+    .apply-btn:active {
+      -webkit-transform: scale(.95);
+      transform: scale(.95);
+    }
+    .footer {
+      padding:0 36px 8px;
+      font-size: 12px;
+      text-align: left;
+    }
+    .footer p {
+      text-align:justify;
+      margin:0;
+    }
+    .footer-text {
+      margin-top:27px;
+      padding:0 36px 8px;
+      font-size: 12px;
+      text-align: left;
+    }
+    .font-blue {
+      color: #04adf0;
+    }
+    .underline {
+      text-decoration: underline;
+      display: inline-block;
+    }
+    .font-weight {
+      font-weight: bold;
+    }
+    .image {
+      display: inline-block;
+      position: relative;
+      min-width: 100%;
+      min-height: 100%;
+
+      transform-origin: left top;
+
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+    }
+    #the-canvas {
+      pointer-events: none;
+      max-width: none;
+      min-width: none;
+      transform-origin: left top;
+      position: absolute;
+      width: 100%;
+    }
+    .err-msg {
+      padding: 0 0.8rem;
+      text-align: center;
+      width: 50%;
+      font-size: 0.9rem;
+    }
+    #err-page {
+      display: none;
+    }
+    #err-page h3{
+      margin: 0.8rem;
+      font-size: 1.4rem;
+      width: 50%;
+    }
+    /* .hover-box,  */
+    .is-version {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 9;
+      display: none;
+      background-color: rgba(0, 0, 0, .4);
+    }
+    /* .hover-box img {
+      width: 290px;
+      right: 16px;
+      position: absolute;
+    }
+    .wc-browser {
+      top: 16px;
+    }
+    .fb-browser {
+      bottom: 16px;
+    }
+    .know-btn {
+      display: block;
+      margin: 70% auto;
+      box-shadow: 1px 2px 2px #fff;
+      font-size: 16px;
+      padding: 4px 18px;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      background: transparent;
+      color: #fff;
+      font-weight: bold;
+    } */
+    .alert-modal {
+      /*width: 80%;*/
+      max-width: 270px;
+      background-color: #fff;
+      position: relative;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+      border-radius: 13px;
+      -webkit-border-radius: 13px;
+      margin: auto;
+    }
+    .alert-modal p {
+      margin: 0;
+      text-align: justify;
+      font-size: 13px;
+      color: inherit;
+      padding: 0 16px 0;
+    }
+    .alert-modal h4 {
+      font-size: 17px;
+      font-weight: 600;
+      margin: 0;
+      padding: 20px 16px 7px;
+    }
+    .alert-modal button {
+      border: none;
+      border-top: 1px solid #dbdbdf;
+      display: block;
+      font-size: 17px;
+      width: 100%;
+      padding: 6px;
+      height:44px;
+      background-color: transparent;
+      color:#488aff;
+      font-weight: 700;
+    }
+    .alert-modal span {
+      color:#488aff;
+      text-decoration: underline;
+    }
+    .alert-modal input {
+      opacity: 0;
+    }
+    #STAFFzh,#SCCzh,#GRADzh,#STAFFen,#SCCen,#GRADen {
+      display: none;
+    }
+    .copy-success {
+      position: fixed;
+      top:0;
+      left:0;
+      bottom:0;
+      right:0;
+      margin:auto;
+      width:150px;
+      height: 40px;
+      line-height:40px;
+      background-color:rgba(0,0,0,.85);
+      color:#fff;
+      z-index: 1;
+      border-radius: 6px;
+      opacity: 0;
+    }
+    .copy-success.show {
+      z-index: 10;
+      animation: showCopy 2s ease;
+      -webkit-animation: showCopy 2s ease;
+    }
+    @keyframes showCopy {
+      0% {opacity: 0}
+      30% {opacity: 1}
+      70% {opacity: 1}
+      100% {opacity: 0}
+    }
+    @-webkit-keyframes showCopy {
+      0% {opacity: 0}
+      30% {opacity: 1}
+      70% {opacity: 1}
+      100% {opacity: 0}
+    }
+  </style>
+</head>
+<body>
+  <div class="copy-success" id="copySuccess">複製成功</div>
+  <div class="is-version">
+    <div class="alert-modal">
+      <h4>注意</h4>
+      <p>提提你，如於申請過程中未能上載文件或遇到其他問題，可能因為你使用的瀏覽器並不支援此網頁。請<span onClick="copyUrl()">按此</span>複製連結至Safari,Chrome,Firefox或Internet Explorer繼續申請。</p >
+      <input type="text" id="copy-ipt" value="测试复制的内容">
+      <button onclick="hideAlert()">確認</button>
+    </div>
+  </div>
+  <!-- <div class="hover-box">
+    <button class="know-btn" onclick="closeHover()">我知道了</button>
+  </div> -->
+<div class="bea-header">
+  <button class="back-btn" id="back" onclick="backPage1()"><</button>
+</div>
+
+<div class="main" id="main">
+  <div class="page1">
+    <img id="landingBG">
+    <div id="STAFFen">
+      <div class="footer">
+        <p><span class="font-weight">1.</span>Spending requirement of new cardholders：</p>
+        <p><span class="font-weight">Gift1,3: </span>To qualify for HK$200 Donation to PolyU or UA Cinema Movie Voucher x 2 as welcome gift,cardholder is required to spend with the new credit card HK$1,500 on retail spending/cash advance within 2 months from card issuance.<span class="font-weight">Gift2: </span>To qualify for 25% cash rebate as welcome gift,cardholder is required to make at least 5 payments via Apple Pay/Android Pay with the new credit card within 2 months from card issuance.<span class="font-weight">Gift4: </span>To qualify for 88,000 reward-U points as welcome gift,cardholder is required to spend with the new credit card HK$9,000 on retail spending/cash advance within 3 months from card issuance.</p>
+        <p><span class="font-weight">2.</span><span class="underline font-blue" onclick="toPDF()">Terms & Conditions</span> of welcome gift apply</p>
+        <p>如需瀏覽中文版，請 <span class="underline font-blue" onclick="changeLang('STAFF','zh')">點此</span> 切換。</p>
+      </div>
+      <p style="height:7%;"><button class="apply-btn f18" onclick="goHome(); ">Apply Now</button></p>
+      <p class="footer-text">To borrow or not to borrow?Borrow only if you can repay！</p>
+    </div>
+    <div id="GRADen">
+      <div class="footer">
+        <p><span class="font-weight">1.</span>Spending requirement of new cardholders：</p>
+        <p><span class="font-weight">Gift1,3: </span>To qualify for HK$200 Donation to PolyU or UA Cinema Movie Voucher x 2 as welcome gift,cardholder is required to spend with the new credit card HK$1,500 on retail spending/cash advance within 2 months from card issuance.<span class="font-weight">Gift2: </span>To qualify for 25% cash rebate as welcome gift,cardholder is required to make at least 5 payments via Apple Pay/Android Pay with the new credit card within 2 months from card issuance.<span class="font-weight">Gift4: </span>To qualify for 88,000 reward-U points as welcome gift,cardholder is required to spend with the new credit card HK$9,000 on retail spending/cash advance within 3 months from card issuance.</p>
+        <p><span class="font-weight">2.</span><span class="underline font-blue" onclick="toPDF()">Terms & Conditions</span> of welcome gift apply</p>
+        <p>如需瀏覽中文版，請 <span class="underline font-blue" onclick="changeLang('GRAD','zh')">點此</span> 切換。</p>
+      </div>
+      <p style="height:7%;"><button class="apply-btn f18" onclick="goHome(); ">Apply Now</button></p>
+      <p class="footer-text">To borrow or not to borrow?Borrow only if you can repay！</p>
+    </div>
+    <div id="SCCen">
+      <div class="footer">
+        <p><span class="font-weight">1.</span>全新客戶於發卡後：</p>
+        <p><span class="font-weight">禮品1：</span>首2個月內憑卡簽賬／透支滿HK$1,500，方可獲贈UA院線電影禮券2張。<span class="font-weight">禮品2：</span>首2個月內憑卡透過Apple Pay或Android Pay付款最少5次，方可獲25%現金回贈。<span class="font-weight">禮品3：</span>首3個月內憑卡簽賬／透支滿HK$9,000，方可獲贈88,000 reward-U積分。</p>
+        <p><span class="font-weight">2.</span>迎新禮品優惠須受<span class="underline font-blue" onclick="toPDF()">條款及細則</span>約束。如你想申請其他東亞銀行信用卡，請<a class="underline font-blue" href="https://www.hkbea.com/html/tc/bea-credit-card-choose-your-card.html">按此</a>。</p>
+        <p>For English version, please click <a class="underline font-blue" href="https://www.hkbea.com/html/en/bea-credit-card-choose-your-card.html?t=6">HERE</a> to apply.</p>
+      </div>
+      <p style="height:7%;"><button class="apply-btn f18" onclick="goHome(); ">立 即 申 請</button></p>
+      <p class="footer-text">借定唔借？還得到先好借！</p>
+    </div>
+    <div id="GRADzh">
+      <div class="footer">
+        <p><span class="font-weight">1.</span>全新客戶於發卡後：</p>
+        <p><span class="font-weight">禮品1,3: </span>首2個月內憑卡簽賬／透支滿HK$1,500，東亞銀行方會捐贈HK$200予香港理工大學或方可獲贈UA院線電影禮券2張。<span class="font-weight">禮品2: </span>首2個月內憑卡透過Apple Pay或Android Pay付款最少5次，方可獲25%現金回贈。<span class="font-weight">禮品4: </span>首3個月內憑卡簽賬／透支滿HK$9,000，方可獲贈88,000 reward-U積分。</p>
+        <p><span class="font-weight">2.</span>迎新禮品優惠須受<span class="underline font-blue" onclick="toPDF()">條款及細則</span>約束。</p>
+        <p>For English version, please click <span class="underline font-blue" onclick="changeLang('GRAD','en')">HERE</span> to apply.</p>
+      </div>
+      <p style="height:7%;"><button class="apply-btn f18" onclick="goHome(); ">立 即 申 請</button></p>
+      <p class="footer-text">借定唔借？還得到先好借！</p>
+    </div>
+    <div id="STAFFzh">
+      <div class="footer">
+        <p><span class="font-weight">1.</span>全新客戶於發卡後：</p>
+        <p><span class="font-weight">禮品1,3: </span>首2個月內憑卡簽賬／透支滿HK$1,500，東亞銀行方會捐贈HK$200予香港理工大學或方可獲贈UA院線電影禮券2張。<span class="font-weight">禮品2: </span>首2個月內憑卡透過Apple Pay或Android Pay付款最少5次，方可獲25%現金回贈。<span class="font-weight">禮品4: </span>首3個月內憑卡簽賬／透支滿HK$9,000，方可獲贈88,000 reward-U積分。</p>
+        <p><span class="font-weight">2.</span>迎新禮品優惠須受<span class="underline font-blue" onclick="toPDF()">條款及細則</span>約束。</p>
+        <p>For English version, please click <span class="underline font-blue" onclick="changeLang('STAFF','en')">HERE</span> to apply.</p>
+      </div>
+      <p style="height:7%;"><button class="apply-btn f18" onclick="goHome(); ">立 即 申 請</button></p>
+      <p class="footer-text">借定唔借？還得到先好借！</p>
+    </div>
+    <div id="SCCzh">
+      <div class="footer">
+        <p><span class="font-weight">1.</span>全新客戶於發卡後：</p>
+        <p><span class="font-weight">禮品1：</span>首2個月內憑卡簽賬／透支滿HK$1,500，方可獲贈UA院線電影禮券2張。<span class="font-weight">禮品2：</span>首2個月內憑卡透過Apple Pay或Android Pay付款最少5次，方可獲25%現金回贈。<span class="font-weight">禮品3：</span>首3個月內憑卡簽賬／透支滿HK$9,000，方可獲贈88,000 reward-U積分。</p>
+        <p><span class="font-weight">2.</span>迎新禮品優惠須受<span class="underline font-blue" onclick="toPDF()">條款及細則</span>約束。如你想申請其他東亞銀行信用卡，請<a class="underline font-blue" href="https://www.hkbea.com/html/tc/bea-credit-card-choose-your-card.html">按此</a>。</p>
+        <p>For English version, please click <a class="underline font-blue" href="https://www.hkbea.com/html/en/bea-credit-card-choose-your-card.html?t=6">HERE</a> to apply.</p>
+      </div>
+      <p style="height:7%;"><button class="apply-btn f18" onclick="goHome(); ">立 即 申 請</button></p>
+      <p class="footer-text">借定唔借？還得到先好借！</p>
+    </div>
+  </div>
+  <div class="page2">
+      <button id="prev" onclick="goPrevious()">上一頁</button>
+      <button id="next" onclick="goNext()">下一頁</button>
+      &nbsp; &nbsp;
+      <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+      <div #container class="image">
+          <canvas #image id="the-canvas" ></canvas>
+        </div>
+      </div>
+</div>
+<div class="main" id="err-page">
+  <h3>抱歉</h3>
+  <p class="err-msg">我們暫時未能處理你的指示。如有查詢，請致電信用卡客戶服務熱線 <a href="tel:36086688">3608 6688</a>。</p>
+</div>
+<script>
+  var urlData = window.location.href.split('?')[1];
+  var main = document.getElementById('main');
+  var back = document.getElementById('back');
+  var isFirst = true;
+  function toPDF(){
+     main.scrollTop = 0;
+     main.setAttribute('class','main show-pdf');
+     back.setAttribute('class','back-btn show');
+    if (isFirst) {
+      isFirst = false;
+      setTimeout(function() {
+        goPrevious();
+      }, 100);
+    }else {
+      setTimeout(function() {
+        renderPage(pageNum);
+      }, 10);
+    }
+  }
+  function backPage1(){
+    main.scrollTop = 0;
+    main.setAttribute('class','main');
+    back.setAttribute('class','back-btn');
+  }
+  function goHome(){
+      var replaceUrl = 'card-apps.html?' + urlData + '&clang='+choiceLang;
+      urlData ? window.location.replace(replaceUrl): window.location.replace('card-apps.html')
+  }
+  function timedGetText( url, time, callback ){
+      var request = new XMLHttpRequest();
+      var timeout = false;
+      var timer = setTimeout( function(){
+          timeout = true;
+          request.abort();
+      }, time );
+      request.open( "POST", url );
+      request.onreadystatechange = function(){
+          if( request.readyState !== 4){
+              return;
+          }
+          if (timeout) {
+              toErr();
+          }
+          clearTimeout( timer );
+          if( request.status === 200 ){
+              callback( request.responseText );
+          }
+      };
+      request.send( null );
+  }
+
+  function toErr() {
+      var errPage = document.getElementById('err-page');
+      main.style.display = 'none';
+      errPage.style.display = 'block';
+      return;
+  }
+
+  timedGetText('/caa_app/checkDevice', 30000, function (data) {
+      data = JSON.parse(data);
+      if (data.status != 'success' || data.ipAccess == false) {
+          toErr();
+      }
+  });
+</script>
+<script src="assets/js/pdf.js"></script>
+<script src="assets/js/config.js"></script>
+<script type="text/javascript">
+  var choiceLang = getUrlParams('l') ? getUrlParams('l') : 'zh';
+  var nextPage = document.getElementById('next'), prevPage = document.getElementById('prev');
+  if (choiceLang == 'zh') {
+    document.title = '申請東亞信用卡'
+    nextPage.innerText = '下一頁';
+    prevPage.innerText = '上一頁';
+  }else {
+    document.title = 'Application for BEA Credit Card'
+    nextPage.innerText = 'Next Page';
+    prevPage.innerText = 'Prev Page';
+  }
+  function copyUrl() {
+    var copyUrl = document.getElementById("copy-ipt");
+    copyUrl.select();
+    document.execCommand("Copy");
+
+    var copySuc = document.getElementById("copySuccess");
+    copySuc.setAttribute('class','copy-success show');
+    setTimeout(function(){
+      copySuc.setAttribute('class','copy-success');
+    },2000)
+  }
+  window.onload = function () {
+    var copyIpt = document.getElementById("copy-ipt");
+    copyIpt.setAttribute('value', window.location.href);
+    var imgNode = document.getElementById('landingBG');
+    var studentText = document.getElementById('studentText');
+    var staffText = document.getElementById('staffText');
+    var applyType = getUrlParams('f').toUpperCase();
+    var lang = getUrlParams('l');
+    customConfig.typeCode.indexOf(applyType) > -1 ? lang ? document.getElementById(applyType + lang).style.display = 'block':document.getElementById(applyType+'zh').style.display = 'block' : document.getElementById('SCCzh').style.display = 'block';
+    imgNode.setAttribute('src',customConfig.typeCode.indexOf(applyType) > -1 ? lang? 'assets/img/landing-'+ applyType + lang + '.jpg':'assets/img/landing-'+applyType+'zh.jpg' :'assets/img/landing-SCCzh.jpg');
+    if (!checkVersion()) {
+      var elem = document.getElementsByClassName('is-version')[0];
+      elem.style.display = 'block';
+    }
+
+    PDFJS.getDocument(url).then(function getPdfHelloWorld(_pdfDoc) {
+      pdfDoc = _pdfDoc;
+      renderPage(pageNum);
+    });
+  };
+
+  function getUrlParams(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); //定义正则表达式
+    var regOk = /^[A-Za-z0-9]+$/;
+    var parURL = window.location.search;
+    var r = parURL.substr(1).match(reg);
+    if (r != null && regOk.test(r[2])) {
+      return r[2];
+    }
+    return '';
+  }
+
+  function changeLang(type,lang) {
+   choiceLang = lang;
+   if (choiceLang == 'zh') {
+    document.title = '申請東亞信用卡'
+    nextPage.innerText = '下一頁';
+    prevPage.innerText = '上一頁';
+  }else {
+    document.title = 'Application for BEA Credit Card'
+    nextPage.innerText = 'Next Page';
+    prevPage.innerText = 'Prev Page';
+  }
+   var imgNode = document.getElementById('landingBG')
+   lang == 'zh'?(document.getElementById(type + 'zh').style.display = 'block',
+                  document.getElementById(type + 'en').style.display = 'none'):
+                  (document.getElementById(type + 'en').style.display = 'block',
+                    document.getElementById(type + 'zh').style.display = 'none');
+    imgNode.setAttribute('src',lang? 'assets/img/landing-'+ type + lang + '.jpg':'assets/img/landing-'+type+'zh.jpg');
+    isFirst = true;
+    pageNum = 2;
+    url = applyType + '_' + (choiceLang == 'zh' ? 'tnc': 'tnc_en');
+    url = customConfig.pdfUrl[url];
+    PDFJS.getDocument(url).then(function getPdfHelloWorld(_pdfDoc) {
+      pdfDoc = _pdfDoc;
+      renderPage(pageNum);
+    });
+  }
+
+  function hideAlert() {
+    var elem = document.getElementsByClassName('is-version')[0];
+    elem.style.display = 'none';
+  }
+
+  function checkVersion() {
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    if (ua.indexOf("Opera") > -1 && ua.match(/(opera\/)(\d+)/i)[2] >= 42) {
+      return true;
+    }else if (ua.indexOf("MSIE") == -1 && ua.indexOf("Trident") > -1) {
+      return true;
+    }else if (ua.indexOf("Firefox") > -1 && ua.match(/(firefox\/)(\d+)/i)[2] >= 51) {
+      return true;
+    }else if (ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") > -1 && ua.match(/(chrome\/)(\d+)/i)[2] >= 55) {
+      return true;
+    }else if ((ua.indexOf("iPad") > -1 || ua.indexOf('iPhone') > -1 || ua.indexOf("Mac") > -1) && ua.match(/(version\/)(\d+)/i)[2] >= 10) {
+      return true;
+    }
+    return false;
+  }
+
+  var applyType = getUrlParams('f').toUpperCase() || 'SCC';
+  var url = applyType + '_' + (choiceLang == 'zh' ? 'tnc': 'tnc_en');
+  url = customConfig.pdfUrl[url];
+//   var url = '/landTest/bea-student-card-tnc.pdf';
+//  var url = 'assets/test.pdf';
+    PDFJS.disableWorker = true;
+    var pdfDoc = null,
+        pageNum = 2,
+        scale = 3,
+        canvas = document.getElementById('the-canvas'),
+        ctx = canvas.getContext('2d');
+
+    function renderPage(num) {
+      pdfDoc.getPage(num).then(function(page) {
+        var viewport = page.getViewport(scale);
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        var renderContext = {
+          canvasContext: ctx,
+          viewport: viewport
+        };
+        page.render(renderContext);
+
+      });
+      document.getElementById('page_num').textContent = pageNum;
+      document.getElementById('page_count').textContent = pdfDoc.numPages;
+
+    }
+
+    function goPrevious() {
+      if (pageNum <= 1)
+        return;
+      pageNum--;
+      renderPage(pageNum);
+    }
+
+    function goNext() {
+      if (pageNum >= pdfDoc.numPages)
+        return;
+      pageNum++;
+      renderPage(pageNum);
+    }
+
+
+
+
+</script>
+</body>
+</html>
